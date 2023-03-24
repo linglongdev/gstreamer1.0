@@ -1,0 +1,40 @@
+package:
+  id: gstreamer1.0
+  name: gstreamer1.0
+  version: 1.14.6
+  kind: lib
+  discription: |
+    gstreamer.
+
+base:
+  id: org.deepin.base
+  version: 20.5.0
+
+#pkg-kde-tools gettext graphviz 
+depends:
+- id: qtbase
+  version: 5.11.3.15
+- id: qttools
+  version: 5.11.3
+- id: qtdeclarative
+  version: 5.11.3
+- id: qtscript
+  version: 5.11.3
+
+source:
+  kind: git
+  url: https://github.com/deepin-community/gstreamer1.0.git
+  version: 1.14.6
+  commit: ff1398e32b7dc7ea1f7f1ca5a524e86f11c0c061
+  patch:
+  - 0001-registrybinary-Update-magic-version-string.patch
+  - 0002-add-sunway-support.patch
+variables:
+  extra_args: |
+    --with-ptp-helper-permissions=capabilities \
+    --disable-failing-tests \
+    --disable-examples \
+    --enable-debug
+
+build:
+  kind: autotools
